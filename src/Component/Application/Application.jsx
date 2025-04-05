@@ -35,7 +35,7 @@ function Application() {
     formData.append("jobId", id);
 
     try {
-      const { data } = await axios.post("/api/postApplication", formData, {
+      const { data } = await axios.post("https://job-bakend.onrender.com/api/postApplication", formData, {
         withCredentials: true,
         headers: {
           "Content-Type": "multipart/form-data",

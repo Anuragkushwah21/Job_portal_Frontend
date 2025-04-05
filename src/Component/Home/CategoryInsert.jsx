@@ -12,7 +12,7 @@ function CategoryInsert() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/categoryInsert", {
+      const response = await axios.post("https://job-bakend.onrender.com/api/categoryInsert", {
         categoryName,
         icon,
       });
@@ -27,7 +27,7 @@ function CategoryInsert() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("/api/employerCategory");
+      const response = await axios.get("https://job-bakend.onrender.com/api/employerCategory");
       console.log(response.data)
       setCategories(response.data.category); // Assuming API returns an array of category objects
     } catch (error) {
@@ -37,7 +37,7 @@ function CategoryInsert() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`/api/deleteCategory/${id}`);
+      const response = await axios.delete(`https://job-bakend.onrender.com/api/deleteCategory/${id}`);
       toast.success(response.data.message || "Category deleted successfully!");
       fetchCategories(); // Refresh the list after deletion
     } catch (error) {

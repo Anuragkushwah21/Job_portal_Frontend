@@ -15,7 +15,7 @@ function Login() {
   const SubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/signIn", {
+      const response = await axios.post("https://job-bakend.onrender.com/api/signIn", {
         email,
         password,
         role,
@@ -37,7 +37,7 @@ function Login() {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/forgotPassword", {
+      const response = await axios.post("https://job-bakend.onrender.com/api/forgotPassword", {
         email: forgotEmail,
       });
       toast.success(response.data.message || "Password reset link sent!", {

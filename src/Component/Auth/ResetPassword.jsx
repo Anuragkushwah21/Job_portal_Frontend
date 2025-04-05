@@ -18,7 +18,7 @@ function ResetPassword() {
     }
 
     try {
-      const response = await axios.post("/api/resetPassword", {
+      const response = await axios.post("https://job-bakend.onrender.com/api/resetPassword", {
         token,
         password: newPassword,
       });

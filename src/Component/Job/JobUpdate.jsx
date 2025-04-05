@@ -24,7 +24,7 @@ function UpdateJob() {
     // Fetch job details by ID
     const fetchJobDetails = async () => {
       try {
-        const response = await axios.get(`/api/job/${id}`); // Replace with your API endpoint
+        const response = await axios.get(`https://job-bakend.onrender.com/api/job/${id}`); // Replace with your API endpoint
         // console.log(response.data)
         setFormData(response.data.job);
       } catch (error) {
@@ -43,7 +43,7 @@ function UpdateJob() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`/api/update/${id}`, formData); // Replace with your API endpoint
+      const response = await axios.put(`https://job-bakend.onrender.com/api/update/${id}`, formData); // Replace with your API endpoint
       //   console.log(response.data)
       toast.success(response.data.message || "Job updated successfully!");
       navigate("/job/me"); // Redirect to the jobs list or another page

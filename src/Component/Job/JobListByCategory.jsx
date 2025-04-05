@@ -12,7 +12,7 @@ function JobListByCategory()  {
     // Fetch jobs by category
     const categoryList = async () => {
       try {
-        const { data } = await axios.get(`/api/categoryJob/${cName}`);
+        const { data } = await axios.get(`https://job-bakend.onrender.com/api/categoryJob/${cName}`);
         setCategory(data.categoryList);
       } catch (error) {
         console.error("Error fetching category list:", error);

@@ -14,7 +14,7 @@ function JobDetails(){
   useEffect(() => {
     const fetchJobDetails = async () => {
       try {
-        const response = await axios.get(`/api/job/${id}`);
+        const response = await axios.get(`https://job-bakend.onrender.com/api/job/${id}`);
         // console.log(response.data)
         setJob(response.data.job);
         setLoading(false);

@@ -8,7 +8,7 @@ function PopularCategories() {
   useEffect(() => {
     // Fetch categories from API
     axios
-      .get("/api/getallCategory") // Replace with your API URL
+      .get("https://job-bakend.onrender.com/api/getallCategory") // Replace with your API URL
       .then((response) => setCategories(response.data.data))
       .catch((error) => console.error("Error fetching categories:", error));
   }, []);

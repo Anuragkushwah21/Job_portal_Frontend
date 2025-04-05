@@ -59,7 +59,7 @@ function Profile() {
 
     setUpdatingPassword(true);
     try {
-      const response = await axios.post("/api/updatePassword", {
+      const response = await axios.post("https://job-bakend.onrender.com/api/updatePassword", {
         oldPassword,
         newPassword,
         confirmPassword,
@@ -85,7 +85,7 @@ function Profile() {
 
     setUpdatingProfile(true);
     try {
-      const response = await axios.post("/api/updateProfile", { name, email });
+      const response = await axios.post("https://job-bakend.onrender.com/api/updateProfile", { name, email });
       toast.success(response.data.message || "Profile updated successfully!");
       setUser((prev) => ({ ...prev, name, email }));
       toggleProfileModal();
@@ -104,7 +104,7 @@ function Profile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("/api/getUser");
+        const response = await axios.get("https://job-bakend.onrender.com/api/getUser");
         setUser(response.data.data);
         setIsAuthorized(true);
       } catch (error) {

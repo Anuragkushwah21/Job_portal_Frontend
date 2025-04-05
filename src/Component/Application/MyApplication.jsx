@@ -14,7 +14,7 @@ function MyApplication() {
 
   useEffect(() => {
     if (!isAuthorized) {
-      navigateTo("/application/me");
+      navigateTo("https://job-bakend.onrender.com/application/me");
       return;
     }
 
@@ -22,8 +22,8 @@ function MyApplication() {
       try {
         const endpoint =
           user?.role === "employer"
-            ? "/api/employer/getall"
-            : "/api/jobSeeker/getall";
+            ? "https://job-bakend.onrender.com/api/employer/getall"
+            : "https://job-bakend.onrender.com/api/jobSeeker/getall";
 
         const { data } = await axios.get(endpoint, { withCredentials: true });
         // console.log(data.applications)
@@ -40,7 +40,7 @@ function MyApplication() {
 
   const deleteApplication = async (id) => {
     try {
-      const { data } = await axios.delete(`/api/jobSeekerDelete/${id}`, {
+      const { data } = await axios.delete(`https://job-bakend.onrender.com/api/jobSeekerDelete/${id}`, {
         withCredentials: true,
       });
       toast.success(data.message);

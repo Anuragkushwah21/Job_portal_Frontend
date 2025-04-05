@@ -28,7 +28,7 @@ function Registrer() {
     e.preventDefault();
     // console.log(data);
     try {
-      const response = await axios.post("/api/signUp", data);
+      const response = await axios.post("https://job-bakend.onrender.com/api/signUp", data);
       if (response.status === 201) {
         toast.success(response.data.message, {
           position: "top-center",

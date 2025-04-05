@@ -1,15 +1,3 @@
-// import React from "react";
-
-// function PopularCompanies() {
-//   return (
-//     <>
-//       <h1>PopularCompanies</h1>
-      
-//     </>
-//   );
-// }
-
-// export default PopularCompanies;
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -24,7 +12,7 @@ function PopularCategories() {
   // Fetch category list
   const CategoryList = async () => {
     try {
-      const { data } = await axios.get(`/api/getCategoryById/${id}`);
+      const { data } = await axios.get(`https://job-bakend.onrender.com/api/getCategoryById/${id}`);
       setCategoryData(data.getCategoryById || []);
     } catch (error) {
       console.error("Error fetching category list:", error);

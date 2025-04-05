@@ -11,7 +11,7 @@ function HeroSection() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("/api/getallCategory");
+        const response = await axios.get("https://job-bakend.onrender.com/api/getallCategory");
         setSelectedCategory(response.data.data || []);
       } catch (error) {
         toast.error("Failed to load categories");

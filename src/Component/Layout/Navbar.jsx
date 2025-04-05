@@ -14,7 +14,7 @@ function Navbar() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("/api/getUser");
+        const response = await axios.get("https://job-bakend.onrender.com/api/getUser");
         // console.log(response.data.data)
         setUser(response.data.data);
         setIsAuthorized(true);
@@ -28,7 +28,7 @@ function Navbar() {
   }, [setUser, setIsAuthorized]);
   const handleLogout = async () => {
     try {
-      const { data } = await axios.post("/api/signOut");
+      const { data } = await axios.post("https://job-bakend.onrender.com/api/signOut");
       toast.success(data.message);
       setIsAuthorized(false);
       setUser(null);

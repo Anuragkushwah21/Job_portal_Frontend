@@ -10,7 +10,7 @@ function Jobs() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("/api/jobList");
+        const response = await axios.get("https://job-bakend.onrender.com/api/jobList");
         setJobs(response.data.data); // Assuming API returns an array of job objects
       } catch (error) {
         console.error("Error fetching job listings:", error);
