@@ -5,7 +5,7 @@ import { Link, Navigate } from "react-router-dom";
 import { Context } from "../../main";
 
 function Login() {
-  const { isAuthorized, setIsAuthorized } = useContext(Context);
+  const { isAuthorized, setIsAuthorized, user} = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
@@ -28,7 +28,7 @@ function Login() {
         }
       };
       fetchUser();
-    }, [setUser, setIsAuthorized]);
+    }, [user, setIsAuthorized]);
 
   const SubmitForm = async (e) => {
     e.preventDefault();

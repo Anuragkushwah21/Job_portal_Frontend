@@ -35,7 +35,7 @@ function Registrer() {
       }
     };
     fetchUser();
-  }, [setUser, setIsAuthorized]);
+  }, [user, setIsAuthorized]);
 
   const inputHandler = (e) => {
     // console.log(e.target.value);

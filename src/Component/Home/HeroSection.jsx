@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { Context } from "../../main";
 
 function HeroSection() {
-  const { isAuthorized, setIsAuthorized } = useContext(Context);
+  const { isAuthorized, setIsAuthorized,user } = useContext(Context);
   const [category, setCategory] = useState("");
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [location, setLocation] = useState("");
@@ -24,7 +24,7 @@ function HeroSection() {
         }
       };
       fetchUser();
-    }, [setUser, setIsAuthorized]);
+    }, [user, setIsAuthorized]);
 
   useEffect(() => {
     const fetchCategories = async () => {
