@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate} from "react-router-dom";
 import { Context } from "../../main";
 
 function Registrer() {
@@ -18,25 +18,6 @@ function Registrer() {
 
   const [data, setData] = useState(job);
 
-  // Fetch user details on component mount
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get(
-          "https://job-bakend.onrender.com/api/getUser"
-        );
-        setUser(response.data.data);
-        setIsAuthorized(true);
-      } catch (error) {
-        setIsAuthorized(false);
-        console.error("Fetch User Error:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchUser();
-  }, [user, setIsAuthorized]);
-
   const inputHandler = (e) => {
     // console.log(e.target.value);
     const { name, value } = e.target;
@@ -47,10 +28,7 @@ function Registrer() {
     e.preventDefault();
     // console.log(data);
     try {
-      const response = await axios.post(
-        "https://job-bakend.onrender.com/api/signUp",
-        data
-      );
+      const response = await axios.post("https://job-bakend.onrender.com/api/signUp", data);
       if (response.status === 201) {
         toast.success(response.data.message, {
           position: "top-center",
@@ -209,7 +187,8 @@ function Registrer() {
                     <option value="employer">Employer</option>
                     <option value="jobSeeker">Job Seeker</option>
                   </select>
-                  <div classNameName="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"></div>
+                  <div classNameName="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  </div>
                 </div>
               </div>
 
