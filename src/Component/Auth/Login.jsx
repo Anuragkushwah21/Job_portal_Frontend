@@ -12,6 +12,24 @@ function Login() {
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal
   const [forgotEmail, setForgotEmail] = useState(""); // Email for password reset
 
+
+    // Fetch user details on component mount
+    useEffect(() => {
+      const fetchUser = async () => {
+        try {
+          const response = await axios.get("https://job-bakend.onrender.com/api/getUser");
+          setUser(response.data.data);
+          setIsAuthorized(true);
+        } catch (error) {
+          setIsAuthorized(false);
+          console.error("Fetch User Error:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchUser();
+    }, [setUser, setIsAuthorized]);
+    
   const SubmitForm = async (e) => {
     e.preventDefault();
     try {
@@ -33,22 +51,7 @@ function Login() {
       console.log("Login error:", error);
     }
   };
-    // Fetch user details on component mount
-    useEffect(() => {
-      const fetchUser = async () => {
-        try {
-          const response = await axios.get("https://job-bakend.onrender.com/api/getUser");
-          setUser(response.data.data);
-          setIsAuthorized(true);
-        } catch (error) {
-          setIsAuthorized(false);
-          console.error("Fetch User Error:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchUser();
-    }, [setUser, setIsAuthorized]);
+  
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();

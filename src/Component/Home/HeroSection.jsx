@@ -1,12 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Context } from "../../main";
 
 function HeroSection() {
+  const { isAuthorized, setIsAuthorized } = useContext(Context);
   const [category, setCategory] = useState("");
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [location, setLocation] = useState("");
   const [locations, setLocations] = useState([]);
+
+    useEffect(() => {
+      const fetchUser = async () => {
+        try {
+          const response = await axios.get("https://job-bakend.onrender.com/api/getUser");
+          setUser(response.data.data);
+          setIsAuthorized(true);
+        } catch (error) {
+          setIsAuthorized(false);
+          console.error("Fetch User Error:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchUser();
+    }, [setUser, setIsAuthorized]);
 
   useEffect(() => {
     const fetchCategories = async () => {
