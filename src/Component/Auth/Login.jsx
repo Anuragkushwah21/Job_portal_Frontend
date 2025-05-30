@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, Navigate } from "react-router-dom";
 import { Context } from "../../main";
@@ -29,7 +29,7 @@ function Login() {
       };
       fetchUser();
     }, [setUser, setIsAuthorized]);
-    
+
   const SubmitForm = async (e) => {
     e.preventDefault();
     try {
