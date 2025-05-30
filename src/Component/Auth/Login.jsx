@@ -9,11 +9,19 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal
-  const [forgotEmail, setForgotEmail] = useState(""); // Email for password reset
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
 
   const SubmitForm = async (e) => {
     e.preventDefault();
+
+    if (!email || !password || !role) {
+      toast.error("Please fill in all fields including role.", {
+        position: "top-center",
+      });
+      return;
+    }
+
     try {
       const response = await axios.post("https://job-bakend.onrender.com/api/signIn", {
         email,
@@ -24,8 +32,6 @@ function Login() {
       toast.success("Login successful!", {
         position: "top-center",
       });
-
-      // console.log("Login successful:", response.data);
     } catch (error) {
       toast.error(error.response?.data?.message || "Login failed!", {
         position: "top-center",
@@ -36,6 +42,14 @@ function Login() {
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
+
+    if (!forgotEmail) {
+      toast.error("Please enter your email address.", {
+        position: "top-center",
+      });
+      return;
+    }
+
     try {
       const response = await axios.post("https://job-bakend.onrender.com/api/forgotPassword", {
         email: forgotEmail,
@@ -43,8 +57,8 @@ function Login() {
       toast.success(response.data.message || "Password reset link sent!", {
         position: "top-center",
       });
-      setIsModalOpen(false); // Close modal after successful submission
-      setForgotEmail(""); // Clear email input
+      setIsModalOpen(false);
+      setForgotEmail("");
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to send reset link.", {
         position: "top-center",
@@ -138,9 +152,10 @@ function Login() {
                 Sign In
               </button>
             </div>
-            <p className="text-md pt-3">
-              Don't Have An Account?&nbsp;
-              <Link to="/registrer" className="font-semibold underline">
+
+            <p className="text-md pt-3 text-center">
+              Don't Have An Account?{" "}
+              <Link to="/register" className="font-semibold underline">
                 Register Now!
               </Link>
               <span
@@ -156,7 +171,7 @@ function Login() {
 
       {/* Modal for Forgot Password */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm">
             <h2 className="text-lg font-bold mb-4">Forgot Password</h2>
             <form onSubmit={handleForgotPassword}>
