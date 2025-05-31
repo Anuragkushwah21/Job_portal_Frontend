@@ -28,7 +28,7 @@ function PostJob() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("https://job-bakend.onrender.com/api/getallCategory"); // Adjust endpoint if necessary
+        const response = await axios.get("https://job-bakend.onrender.com/api/getallCategory",{withCredentials: true}); // Adjust endpoint if necessary
         setSelectedCategory(response.data.data || []);
       } catch (error) {
         toast.error("Failed to load categories");

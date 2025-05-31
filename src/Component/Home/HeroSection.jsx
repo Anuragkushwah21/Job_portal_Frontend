@@ -12,7 +12,9 @@ function HeroSection() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("https://job-bakend.onrender.com/api/getallCategory");
+        const response = await axios.get("https://job-bakend.onrender.com/api/getallCategory", {
+          withCredentials: true
+        });
         setSelectedCategory(response.data.data);
       } catch (error) {
         toast.error("Failed to load categories");
@@ -21,7 +23,7 @@ function HeroSection() {
 
     const fetchLocations = async () => {
       try {
-        const response = await axios.get(`https://restcountries.com/v3.1/all`);
+        const response = await axios.get(`https://restcountries.com/v3.1/all`,{withCredentials: true});
         const locationData = response.data.map((country) => ({
           id: country.cca3,
           locationName: country.name.common,

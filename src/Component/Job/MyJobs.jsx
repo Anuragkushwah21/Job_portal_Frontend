@@ -11,7 +11,7 @@ function MyJobs() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("https://job-bakend.onrender.com/api/employerJobs");
+        const response = await axios.get("https://job-bakend.onrender.com/api/employerJobs",{withCredentials: true});
         console.log(response.data)
         setJobs(response.data.jobs);
         setLoading(false);
@@ -29,7 +29,7 @@ function MyJobs() {
       return; // Exit if user cancels
     }
     try {
-      await axios.delete(`https://job-bakend.onrender.com/api/delete/${id}`);
+      await axios.delete(`https://job-bakend.onrender.com/api/delete/${id}`,{withCredentials: true});
       // Update job list after successful deletion
       setJobs(jobs.filter((job) => job._id !== id));
     } catch (err) {

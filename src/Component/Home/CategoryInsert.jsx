@@ -13,6 +13,7 @@ function CategoryInsert() {
     e.preventDefault();
     try {
       const response = await axios.post("https://job-bakend.onrender.com/api/categoryInsert", {
+        withCredentials: true,
         categoryName,
         icon,
       });

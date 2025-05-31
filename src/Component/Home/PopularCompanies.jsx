@@ -12,7 +12,7 @@ function PopularCategories() {
   // Fetch category list
   const CategoryList = async () => {
     try {
-      const { data } = await axios.get(`https://job-bakend.onrender.com/api/getCategoryById/${id}`);
+      const { data } = await axios.get(`https://job-bakend.onrender.com/api/getCategoryById/${id}`,{withCredentials: true});
       setCategoryData(data.getCategoryById || []);
     } catch (error) {
       console.error("Error fetching category list:", error);
