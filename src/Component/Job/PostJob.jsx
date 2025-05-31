@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Navigate, useParams } from "react-router-dom";
+import API from "../../../config";
 
 function PostJob() {
   const{id}=useParams()
@@ -28,7 +29,7 @@ function PostJob() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("https://job-bakend.onrender.com/api/getallCategory",{withCredentials: true}); // Adjust endpoint if necessary
+        const response = await axios.get(API.GET_ALL_CATEGORIES,{withCredentials: true}); // Adjust endpoint if necessary
         setSelectedCategory(response.data.data || []);
       } catch (error) {
         toast.error("Failed to load categories");
@@ -52,7 +53,7 @@ function PostJob() {
     }
     try {
       const { data } = await axios.post(
-        "https://job-bakend.onrender.com/api/jobPost",
+        API.POST_JOB(id),
         fixedSalary.length >= 4
           ? {
               title,

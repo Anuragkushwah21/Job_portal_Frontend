@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import API from "../../../config";
 
 function PopularCategories() {
   const [categories, setCategories] = useState([]);
@@ -8,7 +9,7 @@ function PopularCategories() {
   useEffect(() => {
     // Fetch categories from API
     axios
-      .get("https://job-bakend.onrender.com/api/getallCategory",{withCredentials: true}) // Replace with your API URL
+      .get(API.GET_ALL_CATEGORIES,{withCredentials: true}) // Replace with your API URL
       .then((response) => setCategories(response.data.data))
       .catch((error) => console.error("Error fetching categories:", error));
   }, []);

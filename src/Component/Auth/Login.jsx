@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, Navigate } from "react-router-dom";
 import { Context } from "../../main";
+import API from "../../../config";
 
 function Login() {
   const { isAuthorized, setIsAuthorized } = useContext(Context);
@@ -15,7 +16,7 @@ function Login() {
   const SubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://job-bakend.onrender.com/api/signIn", {withCredentials: true,
+      const response = await axios.post(API.SIGN_IN, {withCredentials: true,
         email,
         password,
         role,
@@ -37,7 +38,7 @@ function Login() {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://job-bakend.onrender.com/api/forgotPassword", {
+      const response = await axios.post(API.FORGOT_PASSWORD, {
         email: forgotEmail,
       });
       toast.success(response.data.message || "Password reset link sent!", {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./Component/Layout/Navbar";
 import Login from "./Component/Auth/Login";
@@ -21,9 +21,31 @@ import CategoryInsert from "./Component/Home/CategoryInsert";
 import JobListByCategory from "./Component/Job/JobListByCategory";
 import ResetPassword from "./Component/Auth/ResetPassword";
 import JobUpdate from "./Component/Job/JobUpdate";
+import API from "../config";
+import { Context } from "./main";
 
 function App() {
   const location = useLocation(); // Get the current location
+   const {isAuthorized, setIsAuthorized, setUser} = useContext(Context)
+  
+  const fetchUser = async () => { // setIsAuthorized(true);
+    try {
+      const {data} = await axios.get(
+        API.GET_USER, {withCredentials: true}
+      )
+      console.log(data)
+      setUser(data);
+      setIsAuthorized(true);
+    } catch (error) {
+      setIsAuthorized(false);
+    }
+  };
+
+
+  useEffect(() => {
+    
+    fetchUser();
+  }, [isAuthorized]);
 
   const hideNavbarAndFooter =
     location.pathname === "/login" || location.pathname === "/registrer";
@@ -49,7 +71,7 @@ function App() {
         <Route path="/categoryJobs/:cName" element={<JobListByCategory />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/reset-password?/:token" element={<ResetPassword />} />
+        <Route path="/reset-password?/:token" element={<ResetPassword />} />+
       </Routes>
       {!hideNavbarAndFooter && <Footer />}
       <Toaster />

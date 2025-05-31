@@ -6,6 +6,7 @@ import HeroSection from "./HeroSection";
 import PopularCategories from "./PopularCategories";
 import About from "../Layout/About";
 import toast from "react-hot-toast";
+import API from "../../../config";
 
 function Home() {
   const [jobs, setJobs] = useState([]);
@@ -14,7 +15,8 @@ function Home() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("https://job-bakend.onrender.com/api/jobList",{withCredentials: true});
+        const response = await axios.get(API.ALL_JOBS,{withCredentials: true});
+        console.log(response.data.data)
         setJobs(response.data.data); // Assuming API returns an array of job objects
         if(response.data.data.length === 0){
           toast.error("No Job Listings Found",)

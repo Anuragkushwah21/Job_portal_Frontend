@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Context } from "../../main";
+import API from "../../../config";
 
 function PopularCategories() {
   const { id } = useParams();
@@ -12,7 +13,7 @@ function PopularCategories() {
   // Fetch category list
   const CategoryList = async () => {
     try {
-      const { data } = await axios.get(`https://job-bakend.onrender.com/api/getCategoryById/${id}`,{withCredentials: true});
+      const { data } = await axios.get(API.CATEGORY_BY_ID(id), { withCredentials: true });
       setCategoryData(data.getCategoryById || []);
     } catch (error) {
       console.error("Error fetching category list:", error);

@@ -3,19 +3,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../main";
 import axios from "axios";
 import toast from "react-hot-toast";
+import API from "../../../config";
 
 function Navbar() {
   const navigateTo = useNavigate();
   const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
+  console.log(isAuthorized)
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
 
-  // Fetch user data on component mount
+  // // Fetch user data on component mount
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("https://job-bakend.onrender.com/api/getUser",{withCredentials: true,});
-        // console.log(response.data.data)
+        const response = await axios.get(API.GET_USER,{withCredentials: true});
+        console.log(response.data.data)
         setUser(response.data.data);
         setIsAuthorized(true);
       } catch (error) {
@@ -28,7 +30,7 @@ function Navbar() {
   }, [setUser, setIsAuthorized]);
   const handleLogout = async () => {
     try {
-      const { data } = await axios.post("https://job-bakend.onrender.com/api/signOut",{withCredentials: true,});
+      const { data } = await axios.post(API.SIGN_OUT,{withCredentials: true,});
       toast.success(data.message);
       setIsAuthorized(false);
       setUser(null);

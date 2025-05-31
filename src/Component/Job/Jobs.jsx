@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import API from "../../../config";
 
 function Jobs() {
   const [jobs, setJobs] = useState([]);
@@ -10,7 +11,7 @@ function Jobs() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("https://job-bakend.onrender.com/api/jobList",{withCredentials: true});
+        const response = await axios.get(API.ALL_JOBS,{withCredentials: true});
         setJobs(response.data.data); // Assuming API returns an array of job objects
       } catch (error) {
         console.error("Error fetching job listings:", error);
@@ -19,8 +20,6 @@ function Jobs() {
 
     fetchJobs();
   }, []);
-
- 
 
   return (
     <>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import API from "../../../config";
 
 function UpdateJob() {
   const { id } = useParams(); // Get the job ID from the URL
@@ -24,7 +25,7 @@ function UpdateJob() {
     // Fetch job details by ID
     const fetchJobDetails = async () => {
       try {
-        const response = await axios.get(`https://job-bakend.onrender.com/api/job/${id}`,{withCredentials: true}); // Replace with your API endpoint
+        const response = await axios.get(API.JOB_BY_ID(id),{withCredentials: true}); // Replace with your API endpoint
         // console.log(response.data)
         setFormData(response.data.job);
       } catch (error) {
@@ -43,7 +44,7 @@ function UpdateJob() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`https://job-bakend.onrender.com/api/update/${id}`,{withCredentials: true}, formData); // Replace with your API endpoint
+      const response = await axios.put(API.UPDATE_JOB(id),{withCredentials: true}, formData); // Replace with your API endpoint
       //   console.log(response.data)
       toast.success(response.data.message || "Job updated successfully!");
       navigate("/job/me"); // Redirect to the jobs list or another page

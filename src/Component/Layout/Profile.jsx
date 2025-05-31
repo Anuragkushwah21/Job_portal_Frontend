@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Context } from "../../main";
 import toast from "react-hot-toast";
+import API from "../../../config";
 
 function Profile() {
   const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
-  // console.log(isAuthorized)
+  console.log(isAuthorized)
   const [loading, setLoading] = useState(true);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
@@ -59,7 +60,7 @@ function Profile() {
 
     setUpdatingPassword(true);
     try {
-      const response = await axios.post("https://job-bakend.onrender.com/api/updatePassword", {withCredentials: true},{
+      const response = await axios.post(API.UPDATE_PASSWORD, {withCredentials: true},{
         oldPassword,
         newPassword,
         confirmPassword,
@@ -85,7 +86,7 @@ function Profile() {
 
     setUpdatingProfile(true);
     try {
-      const response = await axios.post("https://job-bakend.onrender.com/api/updateProfile",{withCredentials: true} ,{ name, email });
+      const response = await axios.post(API.UPDATE_PROFILE,{withCredentials: true} ,{ name, email });
       toast.success(response.data.message || "Profile updated successfully!");
       setUser((prev) => ({ ...prev, name, email }));
       toggleProfileModal();
@@ -104,7 +105,7 @@ function Profile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("https://job-bakend.onrender.com/api/getUser",{withCredentials: true,});
+        const response = await axios.get(API.GET_USER,{withCredentials: true,});
         setUser(response.data.data);
         setIsAuthorized(true);
       } catch (error) {

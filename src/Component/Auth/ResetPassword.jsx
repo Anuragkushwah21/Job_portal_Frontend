@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSearchParams, Navigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import API from "../../../config";
 
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -18,7 +19,7 @@ function ResetPassword() {
     }
 
     try {
-      const response = await axios.post("https://job-bakend.onrender.com/api/resetPassword", {
+      const response = await axios.post(API.RESET_PASSWORD, {
         withCredentials: true,
         token,
         password: newPassword,

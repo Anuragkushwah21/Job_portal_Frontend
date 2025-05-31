@@ -3,6 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Link, Navigate } from "react-router-dom";
 import { Context } from "../../main";
+import API from "../../../config";
 
 function Registrer() {
   const job = {
@@ -28,11 +29,9 @@ function Registrer() {
     e.preventDefault();
     // console.log(data);
     try {
-      const response = await axios.post(
-        "https://job-bakend.onrender.com/api/signUp",
-        data,
-        { withCredentials: true }
-      );
+      const response = await axios.post(API.SIGN_UP, data, {
+        withCredentials: true,
+      });
       if (response.status === 201) {
         toast.success(response.data.message, {
           position: "top-center",

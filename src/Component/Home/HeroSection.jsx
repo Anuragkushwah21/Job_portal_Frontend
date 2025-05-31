@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import API from "../../../config";
 
 function HeroSection() {
   const [category, setCategory] = useState("");
@@ -12,7 +13,7 @@ function HeroSection() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("https://job-bakend.onrender.com/api/getallCategory", {
+        const response = await axios.get(API.GET_ALL_CATEGORIES, {
           withCredentials: true
         });
         setSelectedCategory(response.data.data);

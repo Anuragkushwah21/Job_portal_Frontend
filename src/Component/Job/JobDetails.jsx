@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { Context } from "../../main";
+import API from "../../../config";
 
 
 function JobDetails(){
@@ -14,7 +15,7 @@ function JobDetails(){
   useEffect(() => {
     const fetchJobDetails = async () => {
       try {
-        const response = await axios.get(`https://job-bakend.onrender.com/api/job/${id}`,{withCredentials: true});
+       const response = await axios.get(API.JOB_BY_ID(id), { withCredentials: true });
         // console.log(response.data)
         setJob(response.data.job);
         setLoading(false);

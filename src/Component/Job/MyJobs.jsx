@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import API from "../../../config";
 
 function MyJobs() {
   const [jobs, setJobs] = useState([]);
@@ -11,7 +12,7 @@ function MyJobs() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("https://job-bakend.onrender.com/api/employerJobs",{withCredentials: true});
+        const response = await axios.get(API.EMPLOYER_JOBS,{withCredentials: true});
         console.log(response.data)
         setJobs(response.data.jobs);
         setLoading(false);
@@ -29,7 +30,7 @@ function MyJobs() {
       return; // Exit if user cancels
     }
     try {
-      await axios.delete(`https://job-bakend.onrender.com/api/delete/${id}`,{withCredentials: true});
+      await axios.delete(API.DELETE_JOB(id),{withCredentials: true});
       // Update job list after successful deletion
       setJobs(jobs.filter((job) => job._id !== id));
     } catch (err) {
