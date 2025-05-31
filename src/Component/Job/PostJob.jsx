@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Context } from "../../main";
+// import { Context } from "../../main";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Navigate, useParams } from "react-router-dom";
@@ -20,10 +20,10 @@ function PostJob() {
   // Initialize as an empty array
   const [selectedCategory, setSelectedCategory] = useState([]);
 
-  const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
-  if (!isAuthorized || (user && user.role !== "employer")) {
-    return <Navigate to={"/"} />;
-  }  
+  // const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
+  // if (!isAuthorized || (user && user.role !== "employer")) {
+  //   return <Navigate to={"/"} />;
+  // }  
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -36,6 +36,8 @@ function PostJob() {
     };
     fetchCategories();
   }, []);
+
+
   const handelSubmit = async (e) => {
     e.preventDefault();
     if (salaryType === "Fixed Salary") {
